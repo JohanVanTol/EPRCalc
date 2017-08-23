@@ -423,6 +423,9 @@ int TMainForm::ReadGaussDisp(AnsiString Filename)
 //---------------------------------------------------------------------------
 //  Read Experimental Data file and store in ExpData (global)
 //
+//  Read experimental data. Either experimental data created with measurement program
+//  or ASCII data files consisting up to 20 columns
+//
 int TMainForm::ReadExpData(AnsiString Filename)
 {
 	ifstream data(Filename.c_str());    // open file
@@ -458,7 +461,7 @@ int TMainForm::ReadExpData(AnsiString Filename)
             {
                 delete[] line;
                 data.close();
-                return -1;
+				return -1;
             }
             if (strncmp(line, ">BEGIN",6) == 0) StopReadHeader = 1;
                             //Serves as a more elegant break
