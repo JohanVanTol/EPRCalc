@@ -1,0 +1,218 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!-- C++Builder XML Project -->
+<PROJECT>
+  <MACROS>
+    <VERSION value="BCB.06.00"/>
+    <PROJECT value="EPRCalc.exe"/>
+    <OBJFILES value="obj\EPRCalc.obj obj\EPRCalcMain2.obj obj\AboutDialog.obj obj\TensorDlg.obj 
+      obj\Vector.obj obj\Tensor.obj obj\Hamilton.obj obj\HamilParam.obj 
+      obj\Eigen.obj obj\Spectrum.obj obj\EPRsimParam.obj obj\PowderEndorDlg.obj 
+      obj\Valid.obj obj\EPRSimDialog.obj obj\ENDORsimParam.obj obj\Mydata20.obj 
+      obj\Myplot20.obj obj\ErrorBx.obj obj\Spinham2.obj obj\Spin.obj 
+      obj\OptionsForm.obj obj\FitCycleDlg.obj obj\FITCYCLE.obj 
+      obj\DataDefineFrm.obj obj\StartDialog.obj obj\Gaussian.obj obj\nrerror.obj 
+      obj\MRQCOF.obj obj\Gaussj2.obj obj\COVSRT.obj obj\Lorentz.obj 
+      obj\Decays.obj obj\StrainForm.obj"/>
+    <RESFILES value="EPRCalc.res"/>
+    <IDLFILES value=""/>
+    <DEFFILE value=""/>
+    <RESDEPEN value="$(RESFILES) EPRCalcMain2.dfm AboutDialog.dfm TensorDlg.dfm Hamilton.dfm 
+      PowderEndorDlg.dfm EPRSimDialog.dfm ..\General\Dialogs\ErrorBx.dfm 
+      OptionsForm.dfm FitCycleDlg.dfm ..\LSQFitProgram\DataDefineFrm.dfm 
+      StartDialog.dfm StrainForm.dfm"/>
+    <LIBFILES value=""/>
+    <LIBRARIES value="vcl.lib rtl.lib"/>
+    <SPARELIBS value="rtl.lib vcl.lib"/>
+    <PACKAGES value="vclx.bpi rtl.bpi vcl.bpi dbrtl.bpi vcldb.bpi bdertl.bpi vcldbx.bpi 
+      bcbsmp.bpi dclocx.bpi qrpt.bpi teeui.bpi vclsmp.bpi teedb.bpi tee.bpi 
+      ibsmp.bpi nmfast.bpi inetdb.bpi inet.bpi"/>
+    <PATHCPP value=".;..\General;..\General;..\General\Dialogs;..\Calcule;..\LSQFitProgram;..\General;..\NRC_cpp;..\NRC_cpp;..\NRC_cpp"/>
+    <PATHPAS value=".;"/>
+    <PATHRC value=".;"/>
+    <PATHASM value=".;"/>
+    <DEBUGLIBPATH value="$(BCB)\lib\debug"/>
+    <RELEASELIBPATH value="$(BCB)\lib\release"/>
+    <LINKER value="ilink32"/>
+    <USERDEFINES value="_DEBUG"/>
+    <SYSDEFINES value="NO_STRICT;_RTLDLL"/>
+    <MAINSOURCE value="EPRCalc.cpp"/>
+    <INCLUDEPATH value="..;&quot;C:\Program Files\Borland\CBuilder6\Projects&quot;;..\NRC_cpp;..\LSQFitProgram;&quot;C:\Program Files\Borland\CBuilder5\Projects&quot;;..\Calcule;..\General\Dialogs;..\General;$(BCB)\include;$(BCB)\include\vcl"/>
+    <LIBPATH value="..;&quot;C:\Program Files\Borland\CBuilder6\Projects&quot;;..\NRC_cpp;..\LSQFitProgram;&quot;C:\Program Files\Borland\CBuilder5\Projects&quot;;..\Calcule;..\General\Dialogs;$(BCB)\lib\obj;$(BCB)\lib;..\General"/>
+    <WARNINGS value="-w-par -w-8027 -w-8026"/>
+    <WARNOPTSTR value=""/>
+    <OTHERFILES value=""/>
+  </MACROS>
+  <OPTIONS>
+    <CFLAG1 value="-Od -H=c:\PROGRA~1\BORLAND\CBUILD~3\lib\vcl60.csm -Hc -Vx -Ve -Tkh30000 
+      -ff -X- -r- -a8 -5 -b- -k -y -v -vi- -c -tW -tWM"/>
+    <PFLAGS value="-N2obj -N0obj -$Y+ -$W -$O- -$A8 -v -M -JPHNE"/>
+    <RFLAGS value=""/>
+    <AFLAGS value="/mx /w2 /zi"/>
+    <LFLAGS value="-l&quot;C:\Documents and Settings\vantol\My Documents\Programs\Calculat\obj&quot; 
+      -Iobj -D&quot;&quot; -aa -Tpe -x -Gn -v"/>
+    <OTHERFILES value=""/>
+  </OPTIONS>
+  <LINKER>
+    <ALLOBJ value="c0w32.obj Memmgr.Lib sysinit.obj $(OBJFILES)"/>
+    <ALLRES value="$(RESFILES)"/>
+    <ALLLIB value="$(LIBFILES) $(LIBRARIES) import32.lib cp32mti.lib"/>
+    <OTHERFILES value=""/>
+  </LINKER>
+  <FILELIST>
+      <FILE FILENAME="EPRCalc.cpp" FORMNAME="" UNITNAME="EPRCalc" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="EPRCalc.res" FORMNAME="" UNITNAME="EPRCalc" CONTAINERID="ResTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="EPRCalcMain2.cpp" FORMNAME="MainForm" UNITNAME="EPRCalcMain2" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="AboutDialog.cpp" FORMNAME="AboutBox" UNITNAME="AboutDialog" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="TensorDlg.cpp" FORMNAME="TensorDialog" UNITNAME="TensorDlg" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Vector.cpp" FORMNAME="" UNITNAME="Vector" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Tensor.cpp" FORMNAME="" UNITNAME="Tensor" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Hamilton.cpp" FORMNAME="HamiltonianDialog" UNITNAME="Hamilton" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="HamilParam.cpp" FORMNAME="" UNITNAME="HamilParam" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Eigen.cpp" FORMNAME="" UNITNAME="Eigen" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Spectrum.cpp" FORMNAME="" UNITNAME="Spectrum" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="EPRsimParam.cpp" FORMNAME="" UNITNAME="EPRsimParam" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="PowderEndorDlg.cpp" FORMNAME="PowderENDORDialog" UNITNAME="PowderEndorDlg" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Valid.cpp" FORMNAME="" UNITNAME="Valid" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="EPRSimDialog.cpp" FORMNAME="EPRSimulationDialog" UNITNAME="EPRSimDialog" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="ENDORsimParam.cpp" FORMNAME="" UNITNAME="ENDORsimParam" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\General\Mydata20.cpp" FORMNAME="" UNITNAME="Mydata20" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\General\Myplot20.cpp" FORMNAME="" UNITNAME="Myplot20" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\General\Dialogs\ErrorBx.cpp" FORMNAME="ErrorBox" UNITNAME="ErrorBx" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Spinham2.cpp" FORMNAME="" UNITNAME="Spinham2" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\Calcule\Spin.cpp" FORMNAME="" UNITNAME="Spin" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="OptionsForm.cpp" FORMNAME="OptionsDialog" UNITNAME="OptionsForm" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="FitCycleDlg.cpp" FORMNAME="FitCycleDialog" UNITNAME="FitCycleDlg" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="FITCYCLE.CPP" FORMNAME="" UNITNAME="FITCYCLE" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\LSQFitProgram\DataDefineFrm.cpp" FORMNAME="DefineDataForm" UNITNAME="DataDefineFrm" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="StartDialog.cpp" FORMNAME="SpectralLineStartDialog" UNITNAME="StartDialog" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Gaussian.cpp" FORMNAME="" UNITNAME="Gaussian" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\General\nrerror.cpp" FORMNAME="" UNITNAME="nrerror" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\NRC_cpp\MRQCOF.CPP" FORMNAME="" UNITNAME="MRQCOF" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\NRC_cpp\Gaussj2.cpp" FORMNAME="" UNITNAME="Gaussj2" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\NRC_cpp\COVSRT.CPP" FORMNAME="" UNITNAME="COVSRT" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Lorentz.cpp" FORMNAME="" UNITNAME="Lorentz" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Decays.cpp" FORMNAME="" UNITNAME="Decays" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="StrainForm.cpp" FORMNAME="StrainDialog" UNITNAME="StrainForm" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+  </FILELIST>
+  <BUILDTOOLS>
+  </BUILDTOOLS>
+
+  <IDEOPTIONS>
+[Version Info]
+IncludeVerInfo=1
+AutoIncBuild=1
+MajorVer=1
+MinorVer=0
+Release=0
+Build=10
+Debug=1
+PreRelease=0
+Special=0
+Private=0
+DLL=0
+Locale=1033
+CodePage=1252
+
+[Version Info Keys]
+CompanyName=NHMFL
+FileDescription=SpinSim, EPR Simulation Program
+FileVersion=1.0.0.10
+InternalName=
+LegalCopyright=J van Tol
+LegalTrademarks=
+OriginalFilename=
+ProductName=
+ProductVersion=1.0.0.0
+Comments=
+
+[HistoryLists\hlIncludePath]
+Count=18
+Item0=..;C:\Program Files\Borland\CBuilder6\Projects;..\NRC_cpp;..\LSQFitProgram;C:\Program Files\Borland\CBuilder5\Projects;..\Calcule;..\General\Dialogs;..\General;$(BCB)\include;$(BCB)\include\vcl
+Item1=..\;C:\Program Files\Borland\CBuilder6\Projects;..\NRC_cpp;..\LSQFitProgram;C:\Program Files\Borland\CBuilder5\Projects\;..;..\Calcule;..\General\Dialogs;..\General;$(BCB)\include;$(BCB)\include\vcl
+Item2=C:\Program Files\Borland\CBuilder5\Projects\;..;..\Calcule;..\General\Dialogs;..\General;$(BCB)\include;$(BCB)\include\vcl
+Item3=C:\Program Files\Borland\CBuilder5\Projects;..;..\Calcule;..\General\Dialogs;..\General;$(BCB)\include;$(BCB)\include\vcl
+Item4=..;..\Calcule;..\General\Dialogs;..\General;$(BCB)\include;$(BCB)\include\vcl
+Item5=..\..\Programs;..\Calcule;..\General\Dialogs;..\General;$(BCB)\include;$(BCB)\include\vcl
+Item6=..\;..\Calcule;..\General\Dialogs;..\General;$(BCB)\include;$(BCB)\include\vcl
+Item7=..\;..\Calcule;..\General\Dialogs;..\..\Measure;..\General;D:\Programs\;..\..\Builder4;$(BCB)\include;$(BCB)\include\vcl
+Item8=..\Calcule;..\General\Dialogs;..\..\Measure;..\General;D:\Programs\;..\..\Builder4;$(BCB)\include;$(BCB)\include\vcl
+Item9=..\..\Measure;..\General;D:\Programs\;..\..\Builder4;$(BCB)\include;$(BCB)\include\vcl
+Item10=..\..\Measure;..\General;..\..\..\Programs;..\..\Builder4;$(BCB)\include;$(BCB)\include\vcl
+Item11=..\..\Measure;..\General;..\..;..;..\..\Builder4;$(BCB)\include;$(BCB)\include\vcl
+Item12=..\..\Builder4;..;$(BCB)\include;$(BCB)\include\vcl
+Item13=..\;..\..\Builder4;..;$(BCB)\include;$(BCB)\include\vcl
+Item14=..\;..\..\Builder4;$(BCB)\include;$(BCB)\include\vcl
+Item15=..\;$(BCB)\include
+Item16=..\..\calcule;..;..\..\..\..\program files\borland\cbuilder3\bin;$(BCB)\include;$(BCB)\include\vcl
+Item17=..\..\..\..\hans\programs\calcule;..\..\..\..\hans\programs\calcule\builder;$(BCB)\include;$(BCB)\include\vcl
+
+[HistoryLists\hlLibraryPath]
+Count=20
+Item0=..;C:\Program Files\Borland\CBuilder6\Projects;..\NRC_cpp;..\LSQFitProgram;C:\Program Files\Borland\CBuilder5\Projects;..\Calcule;..\General\Dialogs;$(BCB)\lib\obj;$(BCB)\lib;..\General
+Item1=..\;C:\Program Files\Borland\CBuilder6\Projects;..\NRC_cpp;..\LSQFitProgram;C:\Program Files\Borland\CBuilder5\Projects\;..;..\Calcule;..\General\Dialogs;$(BCB)\lib\obj;$(BCB)\lib;..\General
+Item2=C:\Program Files\Borland\CBuilder5\Projects\;..;..\Calcule;..\General\Dialogs;$(BCB)\lib\obj;$(BCB)\lib;..\General
+Item3=C:\Program Files\Borland\CBuilder5\Projects;..;..\Calcule;..\General\Dialogs;$(BCB)\lib\obj;$(BCB)\lib;..\General
+Item4=..;..\Calcule;..\General\Dialogs;$(BCB)\lib\obj;$(BCB)\lib;..\General
+Item5=..\..\Programs;..\Calcule;..\General\Dialogs;$(BCB)\lib\obj;$(BCB)\lib;..\General
+Item6=..\;..\Calcule;..\General\Dialogs;$(BCB)\lib\obj;$(BCB)\lib;..\General
+Item7=..\;..\Calcule;..\General\Dialogs;..\..\Measure;$(BCB)\lib\obj;$(BCB)\lib;..\General
+Item8=..\Calcule;..\General\Dialogs;..\..\Measure;$(BCB)\lib\obj;$(BCB)\lib;..\General
+Item9=..\..\Measure;$(BCB)\lib\obj;$(BCB)\lib;..\General
+Item10=$(BCB)\lib\obj;$(BCB)\lib;D:\Hans\Programs\Calculat;D:\Hans\Programs\General
+Item11=..\..\Measure;..\General;..\..\..\Programs;..\..\Builder4;$(BCB)\lib\obj;$(BCB)\lib
+Item12=..\..\Measure;..\General;..\..;..;..\..\Builder4;$(BCB)\lib\obj;$(BCB)\lib
+Item13=..\..\Builder4;..;$(BCB)\lib\obj;$(BCB)\lib
+Item14=..\;..\..\Builder4;$(BCB)\lib\obj;$(BCB)\lib
+Item15=..\;$(BCB)\lib\obj;$(BCB)\lib
+Item16=$(BCB)\lib\obj;$(BCB)\lib
+Item17=..\;..\..\calcule;..;..\..\..\..\program files\borland\cbuilder3\bin;$(BCB)\lib\obj;$(BCB)\lib
+Item18=..\..\calcule;..;..\..\..\..\program files\borland\cbuilder3\bin;$(BCB)\lib\obj;$(BCB)\lib
+Item19=..\..\..\..\hans\programs\calcule;..\..\..\..\hans\programs\calcule\builder;..\lib;$(BCB)\lib\obj;$(BCB)\lib
+
+[HistoryLists\hlDebugSourcePath]
+Count=1
+Item0=$(BCB)\source\vcl
+
+[HistoryLists\hlConditionals]
+Count=2
+Item0=_DEBUG
+Item1=_RTLDLL;USEPACKAGES
+
+[HistoryLists\hlIntOutputDir]
+Count=1
+Item0=obj
+
+[HistoryLists\hIBPIOutputDir]
+Count=5
+Item0=C:\Documents and Settings\vantol\My Documents\Programs\Calculat\obj
+Item1=C:\Documents and Settings\vantol\My Documents\Programs\Calculat\obj\
+Item2=c:\Hans\Programs\Calculat\obj\
+Item3=D:\Hans\Programs\Calculat\obj\
+Item4=obj
+
+[Debugging]
+DebugSourceDirs=$(BCB)\source\vcl
+
+[Parameters]
+RunParams=
+Launcher=
+UseLauncher=0
+DebugCWD=
+HostApplication=
+RemoteHost=
+RemotePath=
+RemoteLauncher=
+RemoteCWD=
+RemoteDebug=0
+
+[Compiler]
+ShowInfoMsgs=0
+LinkDebugVcl=1
+LinkCGLIB=0
+
+[Language]
+ActiveLang=
+ProjectLang=
+RootDir=
+  </IDEOPTIONS>
+</PROJECT>
