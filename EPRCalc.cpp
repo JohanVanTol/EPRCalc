@@ -38,6 +38,7 @@ WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		Application->CreateForm(__classid(TEnergyForm), &EnergyForm);
 		Application->CreateForm(__classid(TgStrainDialog), &gStrainDialog);
 		Application->CreateForm(__classid(TExponentialDecayForm), &ExponentialDecayForm);
+		Application->ShowHint = true;
 		Application->Run();
   }
   catch (Exception &exception)

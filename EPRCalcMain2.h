@@ -103,6 +103,8 @@ __published:	// IDE-managed Components
 	TMenuItem *Print1;
 	TMenuItem *N4;
 	TPrintDialog *PrintDialog;
+	TMenuItem *Magnitude;
+	TMenuItem *T1corr3;
   void __fastcall FileExitClick(TObject *Sender);
   void __fastcall AboutClick(TObject *Sender);
   void __fastcall ParamHamiltonClick(TObject *Sender);
@@ -172,6 +174,8 @@ __published:	// IDE-managed Components
 	void __fastcall SLRcorrectionMenuItemClick(TObject *Sender);
 	void __fastcall SLRcorrection2Click(TObject *Sender);
 	void __fastcall Print1Click(TObject *Sender);
+	void __fastcall MagnitudeClick(TObject *Sender);
+	void __fastcall T1corr3Click(TObject *Sender);
 
 private:	// User declarations
     TRect *FocusRect;
@@ -194,6 +198,7 @@ public:		// User declarations
   void FitBiExponentialDecay(int MaxCycle);
   void SimulateGaussExponential(int expMode);
   void FitGaussExponentialDecay(int MaxCycle);
+  void FitStretchedExponentialDecay(int MaxCycle);
   void CorrectExponentialBaseLine();
   void FitLorentz(int maxCycle);
   void FitGauss(int maxCycle);

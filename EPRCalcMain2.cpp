@@ -3905,6 +3905,9 @@ void TMainForm::SimulateExponential(int mode)
 					break;
 			case 2: GaussExponentialDecay(x,a,&y,da,na);
 					break;
+			case 3: StretchedExponentialDecay(x,a,&y,da,na);
+					break;
+
 		}
 
 		if (ccol>0) P.Set(1,TempData.Get(i).Get(ccol));
@@ -3995,6 +3998,7 @@ void TMainForm::FitExponentialDecay(int MaxCycle)
 		 errora[i] = sqrt(chisqr*covar[i][i]);
 	}
 	ExponentialDecayForm->SetErrors(na, errora);
+	ExponentialDecayForm->setChiSqr(chisqr/npts);
 
 	for (int i=0; i<npts; i++) delete[] xdat[i];
 	delete[] xdat;
@@ -4065,6 +4069,7 @@ void TMainForm::FitBiExponentialDecay(int MaxCycle)
 	}
 	OutputMemo->Lines->Add(chisqr/npts);
 	ExponentialDecayForm->SetParameters(na, a, ai);
+	ExponentialDecayForm->setChiSqr(chisqr/npts);
 
 	for (int i=0;i<npts;i++)
 	{
@@ -4177,6 +4182,7 @@ void TMainForm::FitGaussExponentialDecay(int MaxCycle)
 		 errora[i] = sqrt(chisqr*covar[i][i]);
 	}
 	ExponentialDecayForm->SetErrors(na, errora);
+	ExponentialDecayForm->setChiSqr(chisqr/npts);
 
 	for (int i=0; i<npts; i++) delete[] xdat[i];
 	delete[] xdat;
@@ -4192,6 +4198,99 @@ void TMainForm::FitGaussExponentialDecay(int MaxCycle)
 	Invalidate();
 	return;
 }
+
+void TMainForm::FitStretchedExponentialDecay(int MaxCycle)
+{
+	double a[100];
+	double da[100];
+	int ai[100];
+
+	double low, high, x, y;
+	double chisqr;
+	double alamb;
+
+	double **xdat;
+	double *ydat;
+	double *ysig;
+
+	int na = ExponentialDecayForm->GetParameters(a, ai);
+	double **covar;
+	double **alpha;
+	covar = new double*[na];
+	alpha = new double*[na];
+	for (int i = 0; i<na; i++)
+	{
+		covar[i] = new double[na];
+		alpha[i] = new double[na];
+	}
+
+	int npts = ExponentialDecayForm->GetLimits(&low, &high);
+	if (SimData != NULL) delete SimData;
+	SimData = new DataArray(npts,4);
+	DataArray TempData = ExpData->ReSample(low,high,npts);
+	xdat = new double*[npts];
+	ydat = new double[npts];
+	ysig = new double[npts];
+	int ccol = ColumnComboBox->ItemIndex;
+
+	DataPoint P(4);
+	alamb  = -1.0;
+	if (ccol >0)
+	{
+		for (int i=0; i<npts; i++)
+		{
+			xdat[i] = new double[1];
+			xdat[i][0] = TempData.Get(i).Get(0);
+			ydat[i] = TempData.Get(i).Get(ccol);
+			ysig[i] = sqrt(sig2);
+		}
+		for (int i=0; i< MaxCycle; i++)
+		{
+			fitcycle(xdat,ydat,ysig,npts,1,a,ai,na,covar, alpha, &chisqr,StretchedExponentialDecay, &alamb);
+		}
+		alamb = 0.0;  // This is needed for error-estimation...
+		fitcycle(xdat,ydat,ysig,npts,1,a,ai,na,covar, alpha, &chisqr,StretchedExponentialDecay, &alamb);
+	}
+	OutputMemo->Lines->Add(chisqr/npts);
+	ExponentialDecayForm->SetParameters(na, a, ai);
+
+	for (int i=0;i<npts;i++)
+	{
+		x = low + (double)i*(high-low)/((double)npts -1.0);
+ //       x = low + i*(high-low)/(npts-1);
+		P.Set(0,x);
+		StretchedExponentialDecay(x, a, &y, da, na);
+
+		if (ccol>0) P.Set(1,TempData.Get(i).Get(ccol));
+		P.Set(2,y);
+		P.Set(3,y - TempData.Get(i).Get(ccol));
+		SimData->Add(P);
+	}
+
+// estimate errors
+	double *errora;
+	errora = new double[na];
+	for (int  i=0; i < na; i++) {
+		 errora[i] = sqrt(chisqr*covar[i][i]);
+	}
+	ExponentialDecayForm->SetErrors(na, errora);
+	ExponentialDecayForm->setChiSqr(chisqr/npts);
+
+	for (int i=0; i<npts; i++) delete[] xdat[i];
+	delete[] xdat;
+	delete[] ydat;
+	delete[] ysig;
+	for (int i=0; i<na; i++) delete[] alpha[i];
+	for (int i=0; i<na; i++) delete[] covar[i];
+	delete[] covar;
+	delete[] alpha;
+	delete[] errora;
+
+	SimCheck = true;
+	Invalidate();
+	return;
+}
+
 //---------------------------------------------------------------------------
 void TMainForm::CorrectExponentialBaseLine()
 {
@@ -7073,4 +7172,81 @@ void TMainForm::PrintData()
 				}
  */
 }
+
+void __fastcall TMainForm::MagnitudeClick(TObject *Sender)
+{
+	// Separate in 2 components
+	if (ExpData->Getn() <3) return;
+	if (ExpData->GetNy() < 3) return;
+
+	DataPoint Ptemp(1);
+	DataArray* Magnitude = new DataArray(ExpData->Getn(), 1);
+
+	for (int i=0; i < ExpData->Getn(); i++) {
+	}
+
+	DataPoint P(ExpData->GetNy());
+	double correction, newvalue;
+	for (int i=0; i < ExpData->Getn(); i++) {
+		P = ExpData->Get(i);
+		Ptemp.Set(0,P.Get(0));
+		Ptemp.Set(1,sqrt(P.Get(1)*P.Get(1)+P.Get(3)*P.Get(3)));
+		P.Set(2, Ptemp.Get(1));
+
+		ExpData->Set(i, P);
+	}
+
+	delete Magnitude;
+
+	Invalidate();
+
+	// Simulate background
+	// subtract background or correct difference channel
+/*
+	DataArray *T1Background;
+	T1Background = new DataArray(ExpData->Getn()/2,
+*/
+
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TMainForm::T1corr3Click(TObject *Sender)
+{
+	// Separate in 2 components
+	if (ExpData->Getn() <4) return;
+
+	DataPoint P(ExpData->GetNy());
+	double Diff;
+	DataArray* Background = new DataArray(ExpData->Getn()/2 + 1, 1);
+	DataArray* Signal = new DataArray(ExpData->Getn()/2 + 1, 1);
+
+	int datColumn = ColumnComboBox->ItemIndex;
+	if ((datColumn < 1) || (datColumn >3)) return;
+
+	for (int i=1; i < (ExpData->Getn()-1); i++) {
+		P = ExpData->Get(i);
+		Diff = ExpData->Get(i).Get(datColumn) - 0.5*(ExpData->Get(i-1).Get(datColumn)+ExpData->Get(i+1).Get(datColumn));
+		if (i%2 == 0)
+			P.Set(4, Diff);
+		  else
+			P.Set(4, -1.0*Diff);
+		ExpData->Set(i, P);
+	}
+	P = ExpData->Get(0);
+	P.Set(4,ExpData->Get(1).Get(4));
+	ExpData->Set(0, P);
+	P = ExpData->Get(ExpData->Getn()-1);
+	P.Set(4,ExpData->Get(ExpData->Getn()-2).Get(4));
+	ExpData->Set(ExpData->Getn()-1, P);
+
+	Invalidate();
+
+	// Simulate background
+	// subtract background or correct difference channel
+/*
+	DataArray *T1Background;
+	T1Background = new DataArray(ExpData->Getn()/2,
+*/
+}
+//---------------------------------------------------------------------------
 

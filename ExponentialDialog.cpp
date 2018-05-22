@@ -15,6 +15,7 @@ __fastcall TExponentialDecayForm::TExponentialDecayForm(TComponent* Owner)
 	: TForm(Owner)
 {
 	mode = 0;
+	ChiSqr =1;
 }
 //---------------------------------------------------------------------------
 void __fastcall TExponentialDecayForm::SimulateButtonClick(TObject *Sender)
@@ -29,12 +30,12 @@ void __fastcall TExponentialDecayForm::SimulateButtonClick(TObject *Sender)
 
 int TExponentialDecayForm::GetLimits(double* start, double* stop)
 {
-    int np;
+	int np;
 
 	if (!ValidInt(NptsEdit->Text,&np)) return -1;
 	if (!ValidReal(StartTimeEdit->Text,start)) return -1;
 	if (!ValidReal(EndTimeEdit->Text,stop)) return -1;
-    return np;
+	return np;
 }
 
 int TExponentialDecayForm::GetParameters(double* par, int* fixedpar)
@@ -76,6 +77,12 @@ int TExponentialDecayForm::GetParameters(double* par, int* fixedpar)
 		npar += 3;
 	}
 
+	if (mode == 3) {
+		if (!ValidReal(StretchEdit->Text, &par[3])) return -1;
+		if (StretchCheckBox->Checked) fixedpar[3] = 1; else fixedpar[3] =0;
+
+		npar+=1;
+	}
 
 	return npar;
 }
@@ -108,6 +115,10 @@ int TExponentialDecayForm::SetParameters(int n, double* par, int* fixedpar)
 		GaussSigmaEdit->Text = FloatToStrF((long double)par[5], ffGeneral, 6, 0);
 	}
 
+	if ((mode ==3)) {
+		StretchEdit->Text = FloatToStrF((long double)par[3], ffGeneral, 6, 0);
+
+	}
 
 	return n;
 }
@@ -128,6 +139,11 @@ void TExponentialDecayForm::SetErrors(int na, double* errors)
 		GaussAmpErrorEdit->Text = FloatToStrF((long double)errors[3], ffGeneral, 6, 0);
 		GaussZeroErrorEdit->Text = FloatToStrF((long double)errors[4], ffGeneral, 6, 0);
 		GaussSigmaErrorEdit->Text = FloatToStrF((long double)errors[5], ffGeneral, 6, 0);
+	}
+
+	if ((mode ==3)) {
+		StretchErrorEdit->Text = FloatToStrF((long double)errors[3], ffGeneral, 6, 0);
+
 	}
 
 	return;
@@ -155,6 +171,7 @@ void __fastcall TExponentialDecayForm::Fit10ButtonClick(TObject *Sender)
 		{
 			case 1: MF->FitBiExponentialDecay(10); break;
 			case 2: MF->FitGaussExponentialDecay(10); break;
+			case 3: MF->FitStretchedExponentialDecay(10); break;
 			default: MF->FitExponentialDecay(10); break;
 		}
 	}
@@ -172,6 +189,7 @@ void __fastcall TExponentialDecayForm::FitButtonClick(TObject *Sender)
 		{
 			case 1: MF->FitBiExponentialDecay(1); break;
 			case 2: MF->FitGaussExponentialDecay(1); break;
+			case 3: MF->FitStretchedExponentialDecay(1); break;
 			default: MF->FitExponentialDecay(1); break;
 		}
 	}
@@ -204,6 +222,10 @@ void __fastcall TExponentialDecayForm::BiRadioButtonClick(TObject *Sender)
 	GaussZeroCheckBox->Enabled = false;
 	GaussSigmaCheckBox->Enabled = false;
 
+	StretchEdit->Enabled = false;
+	StretchErrorEdit->Enabled = false;
+	StretchCheckBox->Enabled = false;
+
 }
 //---------------------------------------------------------------------------
 
@@ -231,6 +253,11 @@ void __fastcall TExponentialDecayForm::MonoGaussRadioButtonClick(
 	GaussZeroCheckBox->Enabled = true;
 	GaussSigmaCheckBox->Enabled = true;
 
+	StretchEdit->Enabled = false;
+	StretchErrorEdit->Enabled = false;
+	StretchCheckBox->Enabled = false;
+
+
 }
 //---------------------------------------------------------------------------
 
@@ -255,12 +282,16 @@ void __fastcall TExponentialDecayForm::MonoRadioButtonClick(TObject *Sender)
 	GaussZeroCheckBox->Enabled = false;
 	GaussSigmaCheckBox->Enabled = false;
 
+	StretchEdit->Enabled = false;
+	StretchErrorEdit->Enabled = false;
+	StretchCheckBox->Enabled = false;
+
 }
 //---------------------------------------------------------------------------
 
 void __fastcall TExponentialDecayForm::OKButtonClick(TObject *Sender)
 {
-	Close();	
+	Close();
 }
 //---------------------------------------------------------------------------
 
@@ -304,6 +335,14 @@ int TExponentialDecayForm::Write(ofstream *somefile)
 				<< "  +-  " << GaussSigmaErrorEdit->Text.c_str() << endl;
 	}
 
+	if (mode == 3)
+	{
+		*somefile << "Stretch Parameter : " << StretchEdit->Text.c_str()
+				<< "  +-  " << StretchErrorEdit->Text.c_str() << endl;
+	}
+
+	*somefile << "ChiSqr : " << ChiSqr << endl;
+
 	return 0;
 }
 
@@ -317,9 +356,13 @@ int TExponentialDecayForm::Write(AnsiString *ExParString)
 		{
 			*ExParString = "Fit to Biexponential Decay: \n";
 		}
-		 else
+		 else if (mode == 2)
 		 {
-			*ExParString = "Fit to Gaussian + Mono exponential decay: ";
+			 *ExParString = "Fit to Gaussian + Mono exponential decay: ";
+		 }
+		   else
+		 {
+			*ExParString = "Fit to Stretched Exponential decay: ";
 		 }
 
 	ExParString->cat_printf("Baseline   : %s  +- %s \n", y0Edit->Text.c_str(),
@@ -347,5 +390,45 @@ int TExponentialDecayForm::Write(AnsiString *ExParString)
 			GaussSigmaEdit->Text.c_str(), GaussSigmaErrorEdit->Text.c_str() );
 	}
 
+	if (mode == 3)
+	{
+		ExParString->cat_printf("Stretch parameter : %s  +- %s \n",
+			StretchEdit->Text.c_str(), StretchErrorEdit->Text.c_str());
+	}
+
+	ExParString->cat_printf("ChiSqr: %lf \n", getChiSqr());
+
 	return ExParString->Length();
 }
+
+void __fastcall TExponentialDecayForm::StretchedRadioButtonClick(
+	  TObject *Sender)
+{
+	mode = 3;
+
+	Amp2Edit->Enabled = false;
+	Exp2Edit->Enabled = false;
+	Amp2ErrorEdit->Enabled = false;
+	Exp2ErrorEdit->Enabled = false;
+	Amp2CheckBox->Enabled = false;
+	Exp2CheckBox->Enabled = false;
+
+	GaussAmpEdit->Enabled = false;
+	GaussZeroEdit->Enabled = false;
+	GaussSigmaEdit->Enabled = false;
+	GaussAmpErrorEdit->Enabled = false;
+	GaussZeroErrorEdit->Enabled = false;
+	GaussSigmaErrorEdit->Enabled = false;
+	GaussAmpCheckBox->Enabled = false;
+	GaussZeroCheckBox->Enabled = false;
+	GaussSigmaCheckBox->Enabled = false;
+
+	StretchEdit->Enabled = true;
+	StretchErrorEdit->Enabled = true;
+	StretchCheckBox->Enabled = true;
+
+
+}
+//---------------------------------------------------------------------------
+
+

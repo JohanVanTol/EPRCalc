@@ -51,6 +51,10 @@ __published:	// IDE-managed Components
 	TRadioButton *MonoGaussRadioButton;
 	TRadioButton *MonoRadioButton;
 	TButton *Button1;
+	TRadioButton *StretchedRadioButton;
+	TCheckBox *StretchCheckBox;
+	TEdit *StretchEdit;
+	TEdit *StretchErrorEdit;
 	void __fastcall SimulateButtonClick(TObject *Sender);
 	void __fastcall CorrectBaseLineButtonClick(TObject *Sender);
 	void __fastcall Fit10ButtonClick(TObject *Sender);
@@ -60,8 +64,10 @@ __published:	// IDE-managed Components
 	void __fastcall MonoGaussRadioButtonClick(TObject *Sender);
 	void __fastcall MonoRadioButtonClick(TObject *Sender);
 	void __fastcall OKButtonClick(TObject *Sender);
+	void __fastcall StretchedRadioButtonClick(TObject *Sender);
 private:	// User declarations
 	int mode;
+	double ChiSqr;
 public:		// User declarations
 	__fastcall TExponentialDecayForm(TComponent* Owner);
 	int GetLimits(double* start, double* stop);
@@ -70,6 +76,8 @@ public:		// User declarations
 	void SetErrors(int na, double* errors);
 	int Write(ofstream *somefile);
 	int Write(AnsiString* ExParString);
+	double getChiSqr() {return ChiSqr;}
+	int setChiSqr(double _ChiSqr) {ChiSqr = _ChiSqr;}
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TExponentialDecayForm *ExponentialDecayForm;

@@ -2,7 +2,7 @@ object ExponentialDecayForm: TExponentialDecayForm
   Left = 0
   Top = 0
   Caption = 'ExponentialFit'
-  ClientHeight = 415
+  ClientHeight = 442
   ClientWidth = 556
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -15,7 +15,7 @@ object ExponentialDecayForm: TExponentialDecayForm
   TextHeight = 13
   object OKButton: TBitBtn
     Left = 464
-    Top = 382
+    Top = 409
     Width = 75
     Height = 25
     Caption = 'Done'
@@ -25,7 +25,7 @@ object ExponentialDecayForm: TExponentialDecayForm
   end
   object CancelButton: TBitBtn
     Left = 383
-    Top = 382
+    Top = 409
     Width = 75
     Height = 25
     TabOrder = 1
@@ -34,7 +34,7 @@ object ExponentialDecayForm: TExponentialDecayForm
   end
   object SimulateButton: TButton
     Left = 23
-    Top = 382
+    Top = 409
     Width = 75
     Height = 25
     Caption = 'Simulate'
@@ -59,9 +59,9 @@ object ExponentialDecayForm: TExponentialDecayForm
   end
   object SingleExpGroupBox: TGroupBox
     Left = 23
-    Top = 57
+    Top = 47
     Width = 515
-    Height = 304
+    Height = 346
     Caption = 'Exponential Decay'
     TabOrder = 5
     object y0CheckBox: TCheckBox
@@ -90,7 +90,7 @@ object ExponentialDecayForm: TExponentialDecayForm
     end
     object Amp2ErrorEdit: TEdit
       Left = 352
-      Top = 128
+      Top = 129
       Width = 121
       Height = 21
       Enabled = False
@@ -108,7 +108,7 @@ object ExponentialDecayForm: TExponentialDecayForm
     end
     object Exp2CheckBox: TCheckBox
       Left = 32
-      Top = 154
+      Top = 152
       Width = 97
       Height = 17
       Caption = 'Decay Time 2'
@@ -143,8 +143,8 @@ object ExponentialDecayForm: TExponentialDecayForm
       TabOrder = 8
     end
     object Amp2Edit: TEdit
-      Left = 184
-      Top = 128
+      Left = 176
+      Top = 129
       Width = 121
       Height = 21
       Enabled = False
@@ -152,8 +152,8 @@ object ExponentialDecayForm: TExponentialDecayForm
       Text = '0'
     end
     object Exp2Edit: TEdit
-      Left = 184
-      Top = 152
+      Left = 176
+      Top = 150
       Width = 121
       Height = 21
       Enabled = False
@@ -161,8 +161,8 @@ object ExponentialDecayForm: TExponentialDecayForm
       Text = '1'
     end
     object GaussAmpEdit: TEdit
-      Left = 184
-      Top = 192
+      Left = 176
+      Top = 190
       Width = 121
       Height = 21
       Enabled = False
@@ -170,7 +170,7 @@ object ExponentialDecayForm: TExponentialDecayForm
       Text = '0'
     end
     object GaussZeroEdit: TEdit
-      Left = 184
+      Left = 176
       Top = 215
       Width = 121
       Height = 21
@@ -179,8 +179,8 @@ object ExponentialDecayForm: TExponentialDecayForm
       Text = '0'
     end
     object GaussSigmaEdit: TEdit
-      Left = 184
-      Top = 240
+      Left = 176
+      Top = 236
       Width = 121
       Height = 21
       Enabled = False
@@ -206,8 +206,8 @@ object ExponentialDecayForm: TExponentialDecayForm
       Text = '0'
     end
     object GaussZeroErrorEdit: TEdit
-      Left = 353
-      Top = 217
+      Left = 352
+      Top = 213
       Width = 121
       Height = 21
       Enabled = False
@@ -216,7 +216,7 @@ object ExponentialDecayForm: TExponentialDecayForm
     end
     object GaussSigmaErrorEdit: TEdit
       Left = 352
-      Top = 240
+      Top = 236
       Width = 121
       Height = 21
       Enabled = False
@@ -224,8 +224,8 @@ object ExponentialDecayForm: TExponentialDecayForm
       Text = '0'
     end
     object BiRadioButton: TRadioButton
-      Left = 184
-      Top = 284
+      Left = 16
+      Top = 326
       Width = 113
       Height = 17
       Caption = 'Bi-exponential'
@@ -233,8 +233,8 @@ object ExponentialDecayForm: TExponentialDecayForm
       OnClick = BiRadioButtonClick
     end
     object MonoGaussRadioButton: TRadioButton
-      Left = 352
-      Top = 284
+      Left = 184
+      Top = 324
       Width = 137
       Height = 17
       Caption = 'Mono-Exp + Gaussian'
@@ -242,8 +242,8 @@ object ExponentialDecayForm: TExponentialDecayForm
       OnClick = MonoGaussRadioButtonClick
     end
     object MonoRadioButton: TRadioButton
-      Left = 32
-      Top = 284
+      Left = 16
+      Top = 303
       Width = 113
       Height = 17
       Caption = 'Mono-exponential'
@@ -252,50 +252,86 @@ object ExponentialDecayForm: TExponentialDecayForm
       TabStop = True
       OnClick = MonoRadioButtonClick
     end
+    object StretchedRadioButton: TRadioButton
+      Left = 184
+      Top = 301
+      Width = 113
+      Height = 17
+      Caption = 'Stretched Exponential'
+      TabOrder = 21
+      OnClick = StretchedRadioButtonClick
+    end
+    object StretchCheckBox: TCheckBox
+      Left = 32
+      Top = 280
+      Width = 113
+      Height = 17
+      Caption = 'Stretch Parameter'
+      Enabled = False
+      TabOrder = 22
+    end
+    object StretchEdit: TEdit
+      Left = 176
+      Top = 274
+      Width = 121
+      Height = 21
+      Enabled = False
+      TabOrder = 23
+      Text = '1'
+    end
+    object StretchErrorEdit: TEdit
+      Left = 352
+      Top = 274
+      Width = 121
+      Height = 21
+      Enabled = False
+      TabOrder = 24
+      Text = '0'
+    end
   end
   object y0Edit: TEdit
-    Left = 208
-    Top = 89
+    Left = 199
+    Top = 77
     Width = 121
     Height = 21
     TabOrder = 6
     Text = 'y0Edit'
   end
   object Amp1Edit: TEdit
-    Left = 208
-    Top = 128
+    Left = 199
+    Top = 116
     Width = 121
     Height = 21
     TabOrder = 7
     Text = 'Amp1Edit'
   end
   object Exp1Edit: TEdit
-    Left = 208
-    Top = 151
+    Left = 199
+    Top = 139
     Width = 121
     Height = 21
     TabOrder = 8
     Text = 'Exp1Edit'
   end
   object y0ErrorEdit: TEdit
-    Left = 376
-    Top = 89
+    Left = 375
+    Top = 77
     Width = 121
     Height = 21
     TabOrder = 9
     Text = 'y0ErrorEdit'
   end
   object Amp1ErrorEdit: TEdit
-    Left = 376
-    Top = 128
+    Left = 375
+    Top = 116
     Width = 121
     Height = 21
     TabOrder = 10
     Text = 'Amp1ErrorEdit'
   end
   object Exp1ErrorEdit: TEdit
-    Left = 376
-    Top = 151
+    Left = 375
+    Top = 139
     Width = 121
     Height = 21
     TabOrder = 11
@@ -320,7 +356,7 @@ object ExponentialDecayForm: TExponentialDecayForm
   end
   object FitButton: TButton
     Left = 104
-    Top = 382
+    Top = 409
     Width = 75
     Height = 25
     Caption = 'Fit 1 cycle'
@@ -329,7 +365,7 @@ object ExponentialDecayForm: TExponentialDecayForm
   end
   object Button1: TButton
     Left = 185
-    Top = 382
+    Top = 409
     Width = 75
     Height = 25
     Caption = 'Fit 10 cycles'
