@@ -449,17 +449,18 @@ int TMainForm::ReadExpData(AnsiString Filename)
 		return -1;
 	}
 	if ((strncmp(line, "Measurement made ",17) == 0) ||
-			 (strncmp(line, "DataFile HansFormat",19) == 0))
+			 (strncmp(line, "DataFile HansFormat",19) == 0) ||
+			 (strncmp(line, "Scan",4) == 0))
 	{
 		//  This should be a good measurement file
 		//  which includes a header. Let's read the header.
-        int StopReadHeader = 0;
-        while ((!data.eof()) && (StopReadHeader==0))
-        {
+		int StopReadHeader = 0;
+		while ((!data.eof()) && (StopReadHeader==0))
+		{
 			data.getline(line, maxline);
 			if (data.fail())
-            {
-                delete[] line;
+			{
+				delete[] line;
                 data.close();
 				return -1;
             }
