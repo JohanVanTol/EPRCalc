@@ -17,6 +17,7 @@ OldStuff/
 *.gch
 *.pch
 *.bdsproj
+!EPRCalc.bdsproj
 *.local
 
 # Compiled Dynamic libraries

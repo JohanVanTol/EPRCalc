@@ -65,7 +65,9 @@ object OptionsDialog: TOptionsDialog
       Width = 113
       Height = 17
       Caption = 'From Last'
+      Checked = True
       TabOrder = 3
+      TabStop = True
     end
   end
   object BitBtn1: TBitBtn

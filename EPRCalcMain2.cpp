@@ -553,7 +553,11 @@ void __fastcall TMainForm::Open1Click(TObject *Sender)
 
 	if ((curcol > 0) && (curcol <= ncol))
 		SimPlot->AddTrace(1,curcol);
-	  else     SimPlot->AddTrace(1,1);
+	  else
+	  {
+		  SimPlot->AddTrace(1,1);
+		  curcol = 1;
+	  }
 
 	ColumnComboBox->Items->Clear();
 	ColumnComboBox->Items->Add("0 (Sim)");
@@ -571,7 +575,12 @@ void __fastcall TMainForm::Open1Click(TObject *Sender)
 		OptionsDialog->NoiseColumnComboBox->ItemIndex = curcol;
 	  else OptionsDialog->NoiseColumnComboBox->ItemIndex = 0;
 
-// Use the first some points to get an idea of the noise
+	if (curNoiseCol <0)  {
+	   OptionsDialog->NoiseColumnComboBox->ItemIndex = 1;
+	   curNoiseCol = 1;
+	}
+
+	// Use the first some points to get an idea of the noise
 /*	int stop;
 
 	if (!ValidInt(OptionsDialog->NoisePointsEdit->Text,&stop))
@@ -797,28 +806,28 @@ void __fastcall TMainForm::ColumnComboBoxChange(TObject *Sender)
     columns[0] = ColumnComboBox->ItemIndex;
     SimPlot->SetDataColumns(1,columns,1);
 
-    int stop;
-    if (!ValidInt(OptionsDialog->NoisePointsEdit->Text,&stop))
-        stop = 12;
-    if (stop > ExpData->Getn()) stop = ExpData->Getn();
-
-    double S, S2, Help;
-    S = S2 = 0.0;
-    for (int i=0; i<stop; i++)
-    {
-        Help = ExpData->Get(i).Get(columns[0]);
-        S  += Help;
-        S2 += Help*Help;
-    }
-	if (stop ==0) {
-		S = 0; S2 = 1;
-	}
-	else
-		{
-		S /= double(stop);
-		S2 /= double(stop);
-		}
-	sig2 = S2 - S*S;
+//    int stop;
+//    if (!ValidInt(OptionsDialog->NoisePointsEdit->Text,&stop))
+//        stop = 12;
+//    if (stop > ExpData->Getn()) stop = ExpData->Getn();
+//
+//    double S, S2, Help;
+//    S = S2 = 0.0;
+//    for (int i=0; i<stop; i++)
+//    {
+//        Help = ExpData->Get(i).Get(columns[0]);
+//        S  += Help;
+//        S2 += Help*Help;
+//    }
+//	if (stop ==0) {
+//		S = 0; S2 = 1;
+//	}
+//	else
+//		{
+//		S /= double(stop);
+//		S2 /= double(stop);
+//		}
+//	sig2 = S2 - S*S;
 
     SimCheck = false;
     HamilChanged = true;
