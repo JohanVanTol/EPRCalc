@@ -38,3 +38,6 @@ OldStuff/
 *.tds
 *.out
 *.app
+Levels.dat
+Probabilities.dat
+Transitions.dat
