@@ -1816,8 +1816,9 @@ double TMainForm::HighSpinCalc()
 	double freq;
 	if (!ValidReal(EPRSimulationDialog->FreqEdit->Text, &freq)) return -1.0;
 	double kT;
-	if (!ValidReal(EPRSimulationDialog->TempEdit->Text, &kT)) return -1.0;
-	kT *= (138/6.62);  //  (k/h * 10-9)
+	double TempinK;
+	if (!ValidReal(EPRSimulationDialog->TempEdit->Text, &TempinK)) return -1.0;
+	kT = (138/6.62)*TempinK;  //  (k/h * 10-9)
 	double modul;
 	if (!ValidReal(EPRSimulationDialog->ModulationEdit->Text, &modul)) return -1.0;
 	double wx;
@@ -2068,6 +2069,7 @@ double TMainForm::HighSpinCalc()
 				for (int ilevel=0; ilevel < E.order(); ilevel++) {
 							  out << E[ilevel] << " ";
 						}
+						out << H.magnetization(TempinK);
 						out << endl;
 
 					}
@@ -4005,7 +4007,7 @@ void TMainForm::FitExponentialDecay(int MaxCycle)
 	double *errora;
 	errora = new double[na];
 	for (int  i=0; i < na; i++) {
-		 errora[i] = sqrt(chisqr*covar[i][i]);
+		 errora[i] = sqrt(chisqr*covar[i][i]/npts);
 	}
 	ExponentialDecayForm->SetErrors(na, errora);
 	ExponentialDecayForm->setChiSqr(chisqr/npts);
@@ -4098,7 +4100,7 @@ void TMainForm::FitBiExponentialDecay(int MaxCycle)
 	double *errora;
 	errora = new double[na];
 	for (int  i=0; i < na; i++) {
-		 errora[i] = sqrt(chisqr*covar[i][i]);
+		 errora[i] = sqrt(chisqr*covar[i][i]/npts);
 	}
 	ExponentialDecayForm->SetErrors(na, errora);
 
@@ -4189,7 +4191,7 @@ void TMainForm::FitGaussExponentialDecay(int MaxCycle)
 	double *errora;
 	errora = new double[na];
 	for (int  i=0; i < na; i++) {
-		 errora[i] = sqrt(chisqr*covar[i][i]);
+		 errora[i] = sqrt(chisqr*covar[i][i]/npts);
 	}
 	ExponentialDecayForm->SetErrors(na, errora);
 	ExponentialDecayForm->setChiSqr(chisqr/npts);
@@ -4281,7 +4283,7 @@ void TMainForm::FitStretchedExponentialDecay(int MaxCycle)
 	double *errora;
 	errora = new double[na];
 	for (int  i=0; i < na; i++) {
-		 errora[i] = sqrt(chisqr*covar[i][i]);
+		 errora[i] = sqrt(chisqr*covar[i][i]/npts);
 	}
 	ExponentialDecayForm->SetErrors(na, errora);
 	ExponentialDecayForm->setChiSqr(chisqr/npts);
